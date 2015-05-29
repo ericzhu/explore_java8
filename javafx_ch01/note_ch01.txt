@@ -1,0 +1,103 @@
+-- JavaFX is a set of APIs for desktop programming
+
+-- Main features of JavaFX
+1. A set of API for JavaFX we can use from any JVM languages like java, scala and groovy
+2. Rich UI controls like buttons, text fields, checkboxes and many others, also charts, menus, paints and tables
+3. Web component APIs allow us to embed web pages within JavaFX applications
+4. Graphic and media engines help us work with sounds, videos, 2D and 3D annimations
+5. FXML allows us configure the UIs in a declarative way.
+
+-- Central concept of JavaFX is scene graph
+	* a scene graph is a hierarchical tree of nodes
+	* a scene graph is a visual representation of UI and render any graphic shapes we want to show
+	* a scene graph also manages nodes
+
+-- What is a node
+	* a node is a single element in a scene graph
+	* a node has an ID and style class
+	* With each node we can change effects, opacity, 
+	* We can also transform a node's position and apply event handlers
+
+-- Analogy of JavaFX API
+	* like a theater play, JavaFX application is a stage with scenes
+	* you can have as many scenes as you want
+	* you can changes scenes with the program runs
+	* a stage object is an application window, silimar to a JFrame or JDialog in Swing
+	* on a desktop, a stage has its own top level window with border and title bar.
+	* in a browser, a stage does not have a window but run as a Java Applet
+	* the stage object has methods we can invoke and properties we can configure
+
+-- What is a scene object
+	* a scene object is a content pane
+	* a scene can hold zero or many nodes
+	* a scene has a root property that holds the graphical elements displayed on the stage
+	* a scene is also a base container for all content in scene graph
+
+-- How scene graph is organized?
+Stage	->	Scene	->	Root	->	Parent	->	Leaf
+											->	Leaf
+								->	Parent	->	Leaf
+											->	Leaf
+											
+	1.	Stage represents top level window frame
+	2.	Scene is on the stage, has a root node
+	3.	The root node on the scene can a a parent node or a leaf node
+	4.	parent nodes are containers that hold one or more other nodes
+	5.	leaf nodes on the other hand have no children
+	6.	nodes can be geometric shapes like circle or rectangles
+	7.	nodes can also be UI controls like buttons or text fields
+	8.	nodes can also be 3D objects
+	9.	nodes can also be layout panes like stack pane and grid pane
+	10.	the layout panes manage the layout of their children nodes
+	
+-- JavaFX application requires two important packages
+	1.	javafx.stage package
+		
+		* Stage class
+		- top level of UI containment hierarchy
+		- the Stage class is independent of the platform, it run the same on desktop, mobile and browser
+		
+		* Screen class
+		- this class represents the display device for running JavaFX program
+		- Screen class has methods that let you access screen size and resolution
+		
+	2. javafx.scene package, it contains several important classes
+		* Node class
+		- this class is the super class for all the graphical and UI elements in JavaFX
+		- this class has a large number of methods we can use to configure the nodes
+		- Node's subclass are Text, Images, Media, Shape and Control
+		- Node's class also has properties and methods for mouse and keyboard handling.
+		
+		* Scene class
+		- Scene class include all the UI and graphic in the JavaFX application
+		
+		* Group class
+		- Group class is a subclass of Node, it groups nodes together.
+		- Group class is important, because any change or transforms on that group will also be applied on its children.
+		- Change Group's properties like opacity change all the opacity of the element in that group
+		
+-- Program structure
+	- Typically a JavaFX program is a class that extends Application class
+	- Application class handles the launching and stopping of JavaFX program during runtime
+	- Application class also start the JavaFX application thread.
+	- The main method launches the application with optional command arguments
+	- The application framework call the start() methods with a Stage object.
+	- Inside the start() method the programmers use the Stage object to setup our scene
+	
+-- What is FXML?
+	- FXML is a XML based declarative markup language
+	- It describes the layout of the UIs and components
+	- With FXML, scene graph can be created in a separate file and loaded in Runtime.
+	
+-- Advantage of the XML -- MVC concept
+	Keep the FXML view of the GUI separate from the controller that manipulate the components
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

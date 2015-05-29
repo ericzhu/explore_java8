@@ -1,0 +1,78 @@
+--	Shape Hierarchy
+Node	->	Shape	-> Text
+					-> Circle
+					-> Rectangle
+					-> Ellipse
+					-> Polygon
+					-> Polyline
+					-> Line
+					-> CubicCurve
+					-> Path
+					-> Arc
+					-> QuadCurve
+
+-- All shape share some common properties in Shape class
+* fill				- interior color of shape, this is a Paint type, it can be a color or gradient.
+			  	  	  Gradient can be linear or radial.	With fill, the default value is black
+* smooth			- Antialiasing rendering if true
+* stroke			- this property is a Paint type, is the color drawn around shape line. 
+			  	  	  The default value is null, except for the shape of line, polyline, whose default
+			  	  	  value is black.
+* strokeWidth 		- this property is of Number type representing a square paint width. The default value is 1.
+* strokeType		- Placement of strokeWidth, this placement can be inside, centered or outside when applied
+				  	  to the boundary of a shape.
+* strokeDashOffset	- this property is a Number type, corresponding to the beginning of the stroke.
+* strokeLineCap		- End cap style, square, rounded, or butted.
+* strokeLineJoin	- Decoration applied where path segments meet. The value can be bavoled, meeted or rounded.
+
+-- Creating colors
+Constants, Constructors, Utility Methods
+Color g = Color.RED // built-in color constant
+Color g = new Color(1, 0, 0, 1.0) 	// create color using constructor, all the arguments are double, ranging from
+									// 0 to 1.0, the first three is RGB, the last one is opacity.
+Color g = Color.color(1, 0, 0)		// There is a forth argument for setting the opacity
+Color g = Color.rgb(255, 0, 0);		// There is a forth argument for setting the opacity
+
+Hex Web Values
+Color g = Color.web("0xFF0000");
+Color g = Color.web("0xFF0000");
+Color g = Color.web("rgb(255, 0, 0)");
+
+-- Colors have alpha value for opacity
+
+-- Text shape
+* Define Text string
+* Useful properties
+	- text				String to be displayed
+	- font				font used to display text
+	- textAlignment		alignment in bounding box
+	- wrappingWidth		width constraint for text
+	- underline			puts line below text
+	- strikethrough 	puts line through text
+	- x, y				coordinates of the text origin
+	
+-- Creating fonts
+* Font class
+	- If not specified, the default system font is used.
+	- Fonts belong to a family, and has point size, the weight and the posture
+	
+	Font font1 = new Font(14) // Create a default font with point size 14.
+	Font font2 = new Font("Verdana", 18) // Create a Verdana font with the point size 18.
+	
+	- To make the font bold and static
+	Font font3 = Font.font("Arial", FontWeight.BOLD, 14)
+	Font font4 = Font.font("Times", FontPosture.ITALIC, 18)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

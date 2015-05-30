@@ -23,4 +23,16 @@ eric@eric-ubt:~/dev/explore_java8 (master)$ cat .git/config
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
-	
+
+--------------------------------------------------------------------------------
+------ Push commits to remote branch -------------------------------------------
+--------------------------------------------------------------------------------
+eric@eric-ubt:~/dev/explore_java8 (master)$ git push -u origin master
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 716 bytes | 0 bytes/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To git@github.com:ericzhu/explore_java8.git
+   819e297..feadf4e  master -> master
+Branch master set up to track remote branch master from origin.

@@ -1,0 +1,26 @@
+--------------------------------------------------------------------------------
+------ check the remote corresponding repository of the local one --------------
+--------------------------------------------------------------------------------
+eric@eric-ubt:~/dev/explore_java8 (master)$ git remote
+origin
+
+eric@eric-ubt:~/dev/explore_java8 (master)$ git remote -v
+origin	git@github.com:ericzhu/explore_java8.git (fetch)
+origin	git@github.com:ericzhu/explore_java8.git (push)
+
+--------------------------------------------------------------------------------
+------ View the remote corresponding repository setting in the git config ------
+--------------------------------------------------------------------------------
+eric@eric-ubt:~/dev/explore_java8 (master)$ cat .git/config 
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@github.com:ericzhu/explore_java8.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+	

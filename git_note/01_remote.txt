@@ -36,3 +36,106 @@ Total 4 (delta 0), reused 0 (delta 0)
 To git@github.com:ericzhu/explore_java8.git
    819e297..feadf4e  master -> master
 Branch master set up to track remote branch master from origin.
+
+
+--------------------------------------------------------------------------------
+------ view the remote branch settings on local config -------------------------
+--------------------------------------------------------------------------------
+eric@eric-ubt:~/dev/explore_java8 (master)$ ls -la .git/refs/remotes
+total 12
+drwxrwxr-x 3 eric eric 4096 May 29 20:34 .
+drwxrwxr-x 5 eric eric 4096 May 29 20:34 ..
+drwxrwxr-x 2 eric eric 4096 May 29 21:02 origin
+
+eric@eric-ubt:~/dev/explore_java8 (master)$ ls -la .git/refs/remotes/origin
+total 16
+drwxrwxr-x 2 eric eric 4096 May 29 21:02 .
+drwxrwxr-x 3 eric eric 4096 May 29 20:34 ..
+-rw-rw-r-- 1 eric eric   32 May 29 20:34 HEAD
+-rw-rw-r-- 1 eric eric   41 May 29 21:02 master
+
+
+--------------------------------------------------------------------------------
+------ Create a local branch, push it to remote but do not track it ------------
+--------------------------------------------------------------------------------
+eric@eric-ubt:~/dev/explore_java8 (master)$ git branch non_tracking
+
+eric@eric-ubt:~/dev/explore_java8 (master)$ git push origin non_tracking 
+Total 0 (delta 0), reused 0 (delta 0)
+To git@github.com:ericzhu/explore_java8.git
+ * [new branch]      non_tracking -> non_tracking
+
+eric@eric-ubt:~/dev/explore_java8 (master)$ cat .git/config 
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@github.com:ericzhu/explore_java8.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+
+--------------------------------------------------------------------------------
+------ Track a non tracking branch ---------------------------------------------
+--------------------------------------------------------------------------------
+
+eric@eric-ubt:~/dev/explore_java8 (non_tracking)$ git branch --set-upstream-to origin/non_tracking
+Branch non_tracking set up to track remote branch non_tracking from origin.
+eric@eric-ubt:~/dev/explore_java8 (non_tracking)$ cat .git/config 
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@github.com:ericzhu/explore_java8.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "non_tracking"]
+[branch "non_tracking"]
+	remote = origin
+	merge = refs/heads/non_tracking
+
+
+--------------------------------------------------------------------------------
+------ Untrack a non tracking branch -------------------------------------------
+--------------------------------------------------------------------------------
+
+eric@eric-ubt:~/dev/explore_java8 (non_tracking)$ git branch --unset-upstream non_tracking 
+
+eric@eric-ubt:~/dev/explore_java8 (non_tracking)$ cat .git/config 
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@github.com:ericzhu/explore_java8.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "non_tracking"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
------- check the remote corresponding repository of the local one --------------
+------ check the remote corresponding repository of the local Repo -------------
 --------------------------------------------------------------------------------
 eric@eric-ubt:~/dev/explore_java8 (master)$ git remote
 origin

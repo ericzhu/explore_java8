@@ -251,14 +251,11 @@ public class StarterAppMain extends Application {
 
 	Node createSplitTreeListDemoNode() {
 		TreeItem animalTree = new TreeItem("Animal");
-		animalTree.getChildren().addAll(new TreeItem("Lion"),
-				new TreeItem("Tiger"), new TreeItem("Bear"));
+		animalTree.getChildren().addAll(new TreeItem("Lion"), new TreeItem("Tiger"), new TreeItem("Bear"));
 		TreeItem mineralTree = new TreeItem("Mineral");
-		mineralTree.getChildren().addAll(new TreeItem("Copper"),
-				new TreeItem("Diamond"), new TreeItem("Quartz"));
+		mineralTree.getChildren().addAll(new TreeItem("Copper"), new TreeItem("Diamond"), new TreeItem("Quartz"));
 		TreeItem vegetableTree = new TreeItem("Vegetable");
-		vegetableTree.getChildren().addAll(new TreeItem("Arugula"),
-				new TreeItem("Broccoli"), new TreeItem("Cabbage"));
+		vegetableTree.getChildren().addAll(new TreeItem("Arugula"), new TreeItem("Broccoli"), new TreeItem("Cabbage"));
 
 		TreeItem root = new TreeItem("Root");
 		root.getChildren().addAll(animalTree, mineralTree, vegetableTree);
@@ -276,14 +273,12 @@ public class StarterAppMain extends Application {
 		treeView.getSelectionModel()
 				.selectedItemProperty()
 				.addListener(
-						(ObservableValue observable, Object oldValue,
-								Object newValue) -> {
+						(ObservableValue observable, Object oldValue, Object newValue) -> {
 							TreeItem treeItem = (TreeItem) newValue;
 							if (newValue != null && treeItem.isLeaf()) {
 								model.listViewItems.clear();
 								for (int i = 1; i <= 10000; i++) {
-									model.listViewItems.add(treeItem.getValue()
-											+ " " + i);
+									model.listViewItems.add(treeItem.getValue() + " " + i);
 								}
 							}
 						});
@@ -292,33 +287,21 @@ public class StarterAppMain extends Application {
 	}
 
 	Node createTreeTableDemoNode() {
-		TreeTableView<Person> treeTableView = new TreeTableView(
-				model.getFamilyTree());
-		TreeTableColumn<Person, String> firstNameColumn = new TreeTableColumn(
-				"First Name");
-		firstNameColumn.setCellValueFactory(new TreeItemPropertyValueFactory(
-				"firstName"));
+		TreeTableView<Person> treeTableView = new TreeTableView(model.getFamilyTree());
+		TreeTableColumn<Person, String> firstNameColumn = new TreeTableColumn("First Name");
+		firstNameColumn.setCellValueFactory(new TreeItemPropertyValueFactory("firstName"));
 		firstNameColumn.setPrefWidth(180);
 		TreeTableColumn lastNameColumn = new TreeTableColumn("Last Name");
-		lastNameColumn.setCellValueFactory(new TreeItemPropertyValueFactory(
-				"lastName"));
+		lastNameColumn.setCellValueFactory(new TreeItemPropertyValueFactory("lastName"));
 		lastNameColumn.setPrefWidth(180);
 		TreeTableColumn phoneColumn = new TreeTableColumn("Phone Number");
-		phoneColumn.setCellValueFactory(new TreeItemPropertyValueFactory(
-				"phone"));
+		phoneColumn.setCellValueFactory(new TreeItemPropertyValueFactory("phone"));
 		phoneColumn.setPrefWidth(180);
-		treeTableView.getColumns().addAll(firstNameColumn, lastNameColumn,
-				phoneColumn);
-		treeTableView
-				.getSelectionModel()
-				.selectedItemProperty()
-				.addListener(
-						(ObservableValue<? extends TreeItem<Person>> observable,
-								TreeItem<Person> oldValue,
-								TreeItem<Person> newValue) -> {
+		treeTableView.getColumns().addAll(firstNameColumn, lastNameColumn,phoneColumn);
+		treeTableView.getSelectionModel().selectedItemProperty() .addListener(
+						(ObservableValue<? extends TreeItem<Person>> observable, TreeItem<Person> oldValue, TreeItem<Person> newValue) -> {
 							Person selectedPerson = newValue.getValue();
-							System.out.println(selectedPerson
-									+ " chosen in TreeTableView");
+							System.out.println(selectedPerson + " chosen in TreeTableView");
 						});
 		treeTableView.setShowRoot(false);
 		return treeTableView;
@@ -436,16 +419,14 @@ public class StarterAppMain extends Application {
 		radioToggleGroup.selectToggle(radioToggleGroup.getToggles().get(0));
 		radioToggleGroup.selectedToggleProperty().addListener(
 				(ov, oldValue, newValue) -> {
-					RadioButton rb = ((RadioButton) radioToggleGroup
-							.getSelectedToggle());
+					RadioButton rb = ((RadioButton) radioToggleGroup.getSelectedToggle());
 					if (rb != null) {
 						System.out.println(rb.getText() + " selected");
 					}
 				});
 
 		MenuItem contextA = new MenuItem("MenuItem A");
-		contextA.setOnAction(e -> System.out.println(e.getEventType()
-				+ " occurred on Menu Item A"));
+		contextA.setOnAction(e -> System.out.println(e.getEventType() + " occurred on Menu Item A"));
 		MenuItem contextB = new MenuItem("MenuItem B");
 		final ContextMenu contextMenu = new ContextMenu(contextA, contextB);
 
@@ -469,10 +450,8 @@ public class StarterAppMain extends Application {
 		viewHtmlButton.setOnAction(e -> {
 			Popup alertPopup = createAlertPopup(htmlEditor.getHtmlText());
 			alertPopup.show(
-					stage,
-					(stage.getWidth() - alertPopup.getWidth()) / 2
-							+ stage.getX(),
-					(stage.getHeight() - alertPopup.getHeight()) / 2
+					stage, (stage.getWidth() - alertPopup.getWidth()) / 2
+							+ stage.getX(), (stage.getHeight() - alertPopup.getHeight()) / 2
 							+ stage.getY());
 		});
 		htmlEditorDemo = new BorderPane();

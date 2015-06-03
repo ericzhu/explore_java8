@@ -82,88 +82,147 @@ public class StarterAppMain extends Application {
 	@Override
 	public void start(final Stage primaryStage) {
 		stage = primaryStage;
+		
+		// a VBox for holding menus and toolbar
 		VBox topBox = new VBox(createMenus(), createToolBar());
+		
+		// The root node on the scene
 		BorderPane borderPane = new BorderPane();
+		
+		// Set the main content to the center area of the BorderPane
 		borderPane.setCenter(createTabs());
+		
+		// Set the topBox which contains menus and toolbar to the Top part of the BorderPane
 		borderPane.setTop(topBox);
+		
+		// Create a scene and set the BorderPane as root node on it
 		Scene scene = new Scene(borderPane, 980, 600);
-		scene.getStylesheets().add("/projavafx/starterapp/ui/starterApp.css");
+		
+		// Add a stylesheet on the scene
+		// The style applied at scene level affects on all the nodes on the scene  
+		scene.getStylesheets().add("/javafx/starterapp/ui/starterApp.css");
+		
+		// Set scene on the stage
 		stage.setScene(scene);
 		stage.setTitle("Starter App");
 		stage.show();
 	}
 
-	MenuBar createMenus() {
+	protected MenuBar createMenus() {
+		//CONCEPT: MENU, MENU ITEM
+		
+		// ----- "File" menu -----
+		// Create a menu item "New..."
 		MenuItem itemNew = new MenuItem("New...", new ImageView(new Image( getClass().getResourceAsStream("images/paper.png"))));
+		// Add key shortcut for this menu item
 		itemNew.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
+		// Add event handler for click event
 		itemNew.setOnAction(e -> System.out.println(e.getEventType() + " occurred on MenuItem New"));
+		// Create menu item "Save"
 		MenuItem itemSave = new MenuItem("Save");
 		Menu menuFile = new Menu("File");
 		menuFile.getItems().addAll(itemNew, itemSave);
+		
+		// ----- "Edit" menu -----
 		MenuItem itemCut = new MenuItem("Cut");
 		MenuItem itemCopy = new MenuItem("Copy");
 		MenuItem itemPaste = new MenuItem("Paste");
 		Menu menuEdit = new Menu("Edit");
 		menuEdit.getItems().addAll(itemCut, itemCopy, itemPaste);
+		
+		// Create menu bar and add menus to it.
 		MenuBar menuBar = new MenuBar();
+		menuBar.getStyleClass().add("lightBlueBk");
 		menuBar.getMenus().addAll(menuFile, menuEdit);
 		return menuBar;
 	}
 
-	ToolBar createToolBar() {
+	protected ToolBar createToolBar() {
 		Button newButton = new Button();
+		
+		// ----- "New" button -----
+		//Add a image on the button
 		newButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("images/paper.png"))));
+		//Assign the control an id for latter reference
 		newButton.setId("newButton");
+		//set a tooltip to the button
 		newButton.setTooltip(new Tooltip("New Document... Ctrl+N"));
 		newButton.setOnAction(e -> System.out.println("New toolbar button clicked"));
+		
+		// ----- "Edit" button -----
 		Button editButton = new Button();
-		editButton.setGraphic(new Circle(8, Color.GREEN));
 		editButton.setId("editButton");
+		editButton.setGraphic(new Circle(8, Color.GREEN));
+		editButton.setText("Edit");
+		
+		// ----- "Delete" button -----
 		Button deleteButton = new Button();
 		deleteButton.setGraphic(new Circle(8, Color.BLUE));
 		deleteButton.setId("deleteButton");
+		deleteButton.setText("Delete");
+		
+		// ----- Togglebutton for bolding the text -----
 		ToggleButton boldButton = new ToggleButton();
 		boldButton.setGraphic(new Circle(8, Color.MAROON));
 		boldButton.setId("boldButton");
+		boldButton.setText("Bold");
 		boldButton.setOnAction(e -> {
+			// Get the target of the event
+			ToggleButton tb = ((ToggleButton) e.getTarget());
+			
+			// Print out the event type
+			System.out.print(e.getEventType() + " occurred on ToggleButton " + tb.getId());
+			System.out.print(", and selectedProperty is: ");
+			
+			// get the "selectedProperty" of the ToggleButton
+			System.out.println(tb.selectedProperty().getValue());
+		});
+		
+		// ----- Togglebutton for make the text italic -----
+		ToggleButton italicButton = new ToggleButton();
+		italicButton.setGraphic(new Circle(8, Color.YELLOW));
+		italicButton.setId("italicButton");
+		italicButton.setText("Italic");
+		italicButton.setOnAction(e -> {
 			ToggleButton tb = ((ToggleButton) e.getTarget());
 			System.out.print(e.getEventType() + " occurred on ToggleButton " + tb.getId());
 			System.out.print(", and selectedProperty is: ");
 			System.out.println(tb.selectedProperty().getValue());
 		});
-		ToggleButton italicButton = new ToggleButton();
-		italicButton.setGraphic(new Circle(8, Color.YELLOW));
-		italicButton.setId("italicButton");
-		italicButton.setOnAction(e -> {
-			ToggleButton tb = ((ToggleButton) e.getTarget());
-			System.out.print(e.getEventType() + " occurred on ToggleButton "
-					+ tb.getId());
-			System.out.print(", and selectedProperty is: ");
-			System.out.println(tb.selectedProperty().getValue());
-		});
+		
+		// ------ Create a toggle group containing align left, center and right -----
 		final ToggleGroup alignToggleGroup = new ToggleGroup();
+		
 		ToggleButton leftAlignButton = new ToggleButton();
 		leftAlignButton.setGraphic(new Circle(8, Color.PURPLE));
 		leftAlignButton.setId("leftAlignButton");
+		leftAlignButton.setText("Align <-");
+		
 		leftAlignButton.setToggleGroup(alignToggleGroup);
 		ToggleButton centerAlignButton = new ToggleButton();
 		centerAlignButton.setGraphic(new Circle(8, Color.ORANGE));
 		centerAlignButton.setId("centerAlignButton");
+		centerAlignButton.setText("Align ><");
 		centerAlignButton.setToggleGroup(alignToggleGroup);
+		
 		ToggleButton rightAlignButton = new ToggleButton();
 		rightAlignButton.setGraphic(new Circle(8, Color.CYAN));
 		rightAlignButton.setId("rightAlignButton");
+		rightAlignButton.setText("Align ->");
 		rightAlignButton.setToggleGroup(alignToggleGroup);
+		
+		// Create a tool bar and set buttons to it, and seperate some of them with vertical separator
 		ToolBar toolBar = new ToolBar(newButton, editButton, deleteButton,
 				new Separator(Orientation.VERTICAL), boldButton, italicButton,
 				new Separator(Orientation.VERTICAL), leftAlignButton,
 				centerAlignButton, rightAlignButton);
 
+		
+		// Set the selected toggle
 		alignToggleGroup.selectToggle(alignToggleGroup.getToggles().get(0));
 		alignToggleGroup.selectedToggleProperty().addListener(
-				(ov, oldValue, newValue) -> {
-					ToggleButton tb = ((ToggleButton) alignToggleGroup
-							.getSelectedToggle());
+				(ov, oldValue, newValue) -> { 
+					ToggleButton tb = ((ToggleButton) alignToggleGroup.getSelectedToggle());
 					if (tb != null) {
 						System.out.println(tb.getId() + " selected");
 					}
@@ -172,7 +231,7 @@ public class StarterAppMain extends Application {
 		return toolBar;
 	}
 
-	TabPane createTabs() {
+	protected TabPane createTabs() {
 		final WebView webView = new WebView();
 		Tab tableTab = new Tab("TableView");
 		tableTab.setContent(createTableDemoNode());
@@ -213,8 +272,7 @@ public class StarterAppMain extends Application {
 	Node createTableDemoNode() {
 		TableView table = new TableView(model.getTeamMembers());
 		TableColumn firstNameColumn = new TableColumn("First Name");
-		firstNameColumn.setCellValueFactory(new PropertyValueFactory(
-				"firstName"));
+		firstNameColumn.setCellValueFactory(new PropertyValueFactory("firstName"));
 		firstNameColumn.setPrefWidth(180);
 		TableColumn lastNameColumn = new TableColumn("Last Name");
 		lastNameColumn

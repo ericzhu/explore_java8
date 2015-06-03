@@ -29,3 +29,7 @@
 #rightAlignButton {
 	-fx-padding: 4 4 4 4;
 }
+
+.lightBlueBk {
+	-fx-background-color: lightblue;
+}

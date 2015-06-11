@@ -1,6 +1,12 @@
 package javafx.dummies.ch06;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -104,7 +110,15 @@ public class PizzaOrder extends Application {
 	}
 
 	public static void main(String[] args) {
-		launch(args);
+		// launch(args);
+
+		    ObservableList<String> observableList = FXCollections.observableArrayList();
+		    
+		    observableList.add("item one");
+		    observableList.add("item two");
+		    
+		    List<String> list2 = new ArrayList<String>(observableList);
+		    System.out.println("--- " + list2);
 	}
 
 }

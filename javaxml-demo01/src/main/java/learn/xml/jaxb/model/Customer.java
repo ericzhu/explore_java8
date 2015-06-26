@@ -1,6 +1,5 @@
 package learn.xml.jaxb.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,16 +10,15 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(propOrder = { "name", "phone", "about", "age", "balance", "active",
-		"joined" })
+@XmlType(propOrder = { "name", "phone", "about", "age", "balance", "active", "joined" })
 public class Customer {
 
-	private int id;
+	private Long id;
 	private String name;
 	private String phone;
 	private String about;
-	private int age;
-	private BigDecimal balance;
+	private Long age;
+	private String balance;
 	private boolean active;
 	private Date joined;
 
@@ -34,11 +32,11 @@ public class Customer {
 			JOINED = "joined";
 
 	@XmlAttribute
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -66,19 +64,19 @@ public class Customer {
 		this.about = about;
 	}
 
-	public int getAge() {
+	public Long getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Long age) {
 		this.age = age;
 	}
 
-	public BigDecimal getBalance() {
+	public String getBalance() {
 		return balance;
 	}
 
-	public void setBalance(BigDecimal balance) {
+	public void setBalance(String balance) {
 		this.balance = balance;
 	}
 
@@ -96,5 +94,11 @@ public class Customer {
 
 	public void setJoined(Date joined) {
 		this.joined = joined;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", phone=" + phone + ", about=" + about + ", age=" + age
+				+ ", balance=" + balance + ", active=" + active + ", joined=" + joined + "]";
 	}
 }

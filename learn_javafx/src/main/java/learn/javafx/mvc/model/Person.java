@@ -1,6 +1,7 @@
 package learn.javafx.mvc.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javafx.beans.property.ObjectProperty;
@@ -15,14 +16,10 @@ public class Person {
 		BABY, CHILD, TEEN, ADULT, SENIOR, UNKNOWN
 	};
 
-	private final ReadOnlyIntegerWrapper personId = new ReadOnlyIntegerWrapper(
-			this, "personId", personSequence.incrementAndGet());
-	private final StringProperty firstName = new SimpleStringProperty(this,
-			"firstName", null);
-	private final StringProperty lastName = new SimpleStringProperty(this,
-			"lastName", null);
-	private final ObjectProperty<LocalDate> birthDate = new SimpleObjectProperty<>(
-			this, "birthDate", null);
+	private final ReadOnlyIntegerWrapper personId = new ReadOnlyIntegerWrapper(this, "personId", personSequence.incrementAndGet());
+	private final StringProperty firstName = new SimpleStringProperty(this, "firstName", null);
+	private final StringProperty lastName = new SimpleStringProperty(this, "lastName", null);
+	private final ObjectProperty<LocalDate> birthDate = new SimpleObjectProperty<>(this, "birthDate", null);
 
 	// Keeps track of last generated person id
 	private static AtomicInteger personSequence = new AtomicInteger(0);
@@ -83,5 +80,31 @@ public class Person {
 
 	public final ObjectProperty<LocalDate> birthDateProperty() {
 		return birthDate;
+	}
+	
+	/* Domain specific business rules */
+	public AgeCategory getAgeCategory() {
+		if (birthDate.get() == null) {
+			return AgeCategory.UNKNOWN;
+		}
+		
+		long years = ChronoUnit.YEARS.between(birthDate.get(), LocalDate.now());
+		if (years >= 0 && years < 2) {
+			return AgeCategory.BABY;
+		}
+		else if (years >= 2 && years < 13) {
+			return AgeCategory.CHILD;
+		}
+		else if (years >= 13 && years <= 19) {
+			return AgeCategory.TEEN;
+		} 
+		else if (years > 19 && years <= 50) {
+			return AgeCategory.ADULT;
+		} 
+		else if (years > 50) {
+			return AgeCategory.SENIOR;
+		} else {
+			return AgeCategory.UNKNOWN;
+		}
 	}
 }

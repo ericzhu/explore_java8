@@ -7,9 +7,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="customers")
+@XmlRootElement(name = "customers")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Customers {
+
+	@XmlElement
+	private GroupType groupType;
 
 	@XmlElement(name = "customer", type = Customer.class)
 	private List<Customer> customers;
@@ -22,4 +25,11 @@ public class Customers {
 		this.customers = customers;
 	}
 
+	public GroupType getGroupType() {
+		return groupType;
+	}
+
+	public void setGroupType(GroupType groupType) {
+		this.groupType = groupType;
+	}
 }

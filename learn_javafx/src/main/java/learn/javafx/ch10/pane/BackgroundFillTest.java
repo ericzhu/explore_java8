@@ -47,7 +47,6 @@ public class BackgroundFillTest extends Application {
 	}
 
 	public Pane getObjectStylePane() {
-
 		Pane p = new Pane();
 		p.setPrefSize(100, 50);
 
@@ -55,7 +54,6 @@ public class BackgroundFillTest extends Application {
 		BackgroundFill redFill = new BackgroundFill(Color.RED, new CornerRadii(2), new Insets(4));
 
 		Background bg = new Background(lightGrayFill, redFill);
-
 		p.setBackground(bg);
 
 		return p;

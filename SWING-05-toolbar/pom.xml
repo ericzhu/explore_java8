@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>swing.demo</groupId>
-	<artifactId>SWING-03-repond-to-buttonclick</artifactId>
+	<artifactId>SWING-04-custom-component</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>SWING-03-repond-to-buttonclick</name>
+	<name>SWING-05-toolbar</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

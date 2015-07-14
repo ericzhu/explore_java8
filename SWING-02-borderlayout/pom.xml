@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>swing.demo</groupId>
-	<artifactId>SWING-01-basic-application</artifactId>
+	<artifactId>SWING-02-borderlayout</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>swing.demo</groupId>
-	<artifactId>SWING-07-label-textfield</artifactId>
+	<artifactId>SWING-10-checkbox</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 

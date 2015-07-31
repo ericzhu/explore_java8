@@ -1,4 +1,4 @@
-package swing.demo11;
+package swing.demo12;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class MainFrame extends JFrame {
 
@@ -79,7 +80,12 @@ public class MainFrame extends JFrame {
 		exitItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(1);
+				int action = JOptionPane.showConfirmDialog(MainFrame.this, "Do you want to exit application", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+				
+				if(action == JOptionPane.OK_OPTION) {
+					System.exit(0);
+				}
+				
 			}
 		});
 		

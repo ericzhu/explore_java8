@@ -1,14 +1,16 @@
-package swing.demo11;
+package swing.demo13;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class MainFrame extends JFrame {
 
@@ -17,6 +19,7 @@ public class MainFrame extends JFrame {
 	private TextPanel textPanel;
 	private Toolbar toolbar;
 	private FormPanel formPanel;
+	private JFileChooser fileChooser;
 
 	public MainFrame() {
 
@@ -30,14 +33,13 @@ public class MainFrame extends JFrame {
 		setLayout(new BorderLayout());
 		
 		// Set menu bar
-		
 		setJMenuBar(createMenuBar());
 
 		// Create components and add them to the content pane
 		textPanel = new TextPanel();
 		toolbar = new Toolbar();
 		formPanel = new FormPanel();
-		
+		fileChooser = new JFileChooser();
 		
 		add(toolbar, BorderLayout.NORTH);
 		add(textPanel, BorderLayout.CENTER);
@@ -57,7 +59,6 @@ public class MainFrame extends JFrame {
 			public void eventOccure(FormEvent event) {
 				String name = event.getName();
 				String occupation = event.getOccupation();
-				
 				textPanel.appendText(name + " : " + occupation + "\n");
 			}
 		});
@@ -72,6 +73,24 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem importDataItem = new JMenuItem("Import Data ...");
 		fileMenu.add(importDataItem);
+		
+		exportDataItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fileChooser.showSaveDialog(MainFrame.this);
+			}
+		});
+		
+		importDataItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(fileChooser.showOpenDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
+					System.out.println(fileChooser.getSelectedFile());
+				}
+			}
+		});
+		
+		
 		fileMenu.addSeparator();
 		
 		JMenuItem exitItem = new JMenuItem("exit");
@@ -79,14 +98,18 @@ public class MainFrame extends JFrame {
 		exitItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(1);
+				int action = JOptionPane.showConfirmDialog(MainFrame.this, "Do you want to exit application", "Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+				
+				if(action == JOptionPane.OK_OPTION) {
+					System.exit(0);
+				}
+				
 			}
 		});
 		
 		
 		
 		JMenu windowMenu = new JMenu("Window");
-		
 		JMenu showMenu = new JMenu("Show");
 		JCheckBoxMenuItem showPersonForm = new JCheckBoxMenuItem("Person Form");
 		showPersonForm.setSelected(true);
